@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>詭異遊戲網站</title>
+    <meta charset="utf-8" />
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            background-image: url('https://wallup.net/wp-content/uploads/2018/09/27/916081-art-artwork-fantasy-artistic-original-abstract-abstraction.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        #header {
+            padding: 1.5em 0;
+            line-height: 1.5;
+            border-bottom: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        #intro {
+            max-width: 880px;
+            margin: 0 auto;
+            font-size: 1.01em;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.954);
+            border-bottom: 3px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 5px;
+            margin-top: -5px;
+        }
+ 
+    </style>
+</head>
+
+<body class="is-preload">
+
+    <div id="header">
+        <h1>詭異遊戲網站</h1>
+    </div>
+
+    <div id="intro">
+        <p>歡迎來到詭異遊戲網站，一個充滿神秘和驚奇的遊戲世界。準備好挑戰自己的勇氣和智慧了嗎？點擊下方按鈕開始冒險吧！</p>
+        <div class="divider"></div>
+        <div id="intro"></div>
+        <p>遊戲名稱: 殺時小遊戲。</p>
+        <p>遊戲介紹: 這是一款充滿刺激與冒險精神的遊戲<br>
+            提供玩家聽覺視覺觸覺等多方面沉浸式體驗。</p>
+        <p>遊戲玩法:操控角色跳躍且避開上下不規則障礙物<br>
+            如果角色碰到了障礙物，遊戲則會結束，計分由遊玩時間做計算。</p>
+            
+        
+        <audio controls autoplay muted src="./cry_sound.mp3" autoplay=true id="sound">
+            <button onclick="startGame()"></button>
+        </audio>
+        <!-- <embed src="./cry.mp3" autostart="true" loop="true" hidden="true"></embed> -->
+        <!-- <bgsound src="./cry.mp3" autostart=true loop=infinite>  -->
+        <!-- <audio src="music/We Don't Talk Anymore.mp3" id="aud" autoplay="autoplay" controls="controls" preload="auto"></audio> -->
+        
+    
+        <script>
+            window.msAudioContext;
+            try {
+                var context = new contextClass();
+                var source = null;
+                var audioBuffer = null;
+        
+                function stopSound() {
+                    if (source) {
+                        source.stop(); 
+                    }
+                }
+        
+                function playSound() {
+                    source = context.createBufferSource();
+                    source.buffer = audioBuffer;
+                    source.loop = true;
+                    source.connect(context.destination);
+                    source.start(0); // 立即播放    
+                }
+        
+                function initSound(arrayBuffer) {
+                    context.decodeAudioData(arrayBuffer, function (buffer) { 
+                        audioBuffer = buffer;
+                        playSound();
+                    }, function (e) { 
+                        console.log('404', e);
+                    });
+                }
+        
+                function loadAudioFile(url) {
+                    var xhr = new XMLHttpRequest(); 
+                    xhr.open('GET', url, true);
+                    xhr.responseType = 'arraybuffer';
+                    xhr.onload = function (e) { 
+                        initSound(this.response);
+                    };
+                    xhr.send();
+                }
+        
+                //用來儲存音樂音檔的路徑
+                loadAudioFile("project/cry_sound.mp3");
+            } catch (e) {
+                console.log('無法找到音樂');
+            }
+        
+            // 開始遊戲邏輯
+            // 這裡你可以放入你的遊戲程式碼，例如 Canvas 遊戲或其他互動元素
+            // 在遊戲進行中，你可以更新分數等資訊
+        
+            // 隱藏開始按鈕，顯示遊戲內容
+            document.addEventListener('DOMContentLoaded', function() {
+    
+                var startBtn = document.getElementById('start-btn');
+                if (startBtn) {
+                startBtn.style.display = 'none';
+            }
+        });
+
+
+            document.getElementById('start-btn').style.display = 'none';
+            document.getElementById('game-content').style.display = 'block';
+        </script>
+        </body>
+        </html>
+        
